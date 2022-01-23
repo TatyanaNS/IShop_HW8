@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+  <title>Registration </title>
+  <thymeleaf th:replace="headers :: head" />
+</head>
+<body>
+
+<section class="vh-100 bg-image" style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp');">
+  <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+          <div class="card" style="border-radius: 15px;">
+            <div class="card-body p-5">
+              <h2 class="text-uppercase text-center mb-5">Create an account</h2>
+
+              <form action="/registration" method="POST">
+                <div class="form-outline mb-4">
+                    <label class="form-label" for="lastName">Last name</label>
+                    <input type="text" name="lastName" id="lastName" class="form-control form-control-lg" />
+                </div>
+
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="FirstNAme">First name</label>
+                    <input type="text" name="firstName" id="FirstName" class="form-control form-control-lg" />
+                    <div th:if="${firstName}" th:utext="${firstName}" class="alert alert-danger">[error]</div>
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="email">Email</label>
+                    <input type="email" name="email" id="email" class="form-control form-control-lg" />
+                    <div th:if="${email}" th:utext="${email}" class="alert alert-danger">[error]</div>
+                    <div class="alert alert-danger" th:if="${errorUniqueEmail}" th:utext="${errorUniqueEmail}"/>
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="password">Password</label>
+                    <input type="password" name="password" id="password" class="form-control form-control-lg" />
+                    <div th:if="${password}" th:utext="${password}" class="alert alert-danger">[error]</div>
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <label for="roles" class="form-label">Roles</label>
+                    <select class="form-select" multiple="multiple" id="roles" name="roles">
+                      <option th:each="role : ${getRoles}"
+                              th:value="${{role.id}}"
+                              th:utext="${role.name}">
+                    </select>
+                    <div th:if="${roles}" th:utext="${roles}" class="alert alert-danger">[error]</div>
+                  </div>
+
+                  <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-success btn-block btn-lg custom-4" >Register</button>
+                  </div>
+                  <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="/login" class="fw-bold text-body"><u>Login here</u></a></p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</body>
+</html>

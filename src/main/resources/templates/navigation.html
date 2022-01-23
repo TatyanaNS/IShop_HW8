@@ -1,0 +1,12 @@
+<html xmlns:th="https://www.thymeleaf.org/"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<ul th:fragment="nav" >
+  <li><a class="active" href="/">Main page</a></li>
+  <li><a href="/users" sec:authorize="hasAuthority('admin')">Users</a></li>
+  <li><a href="/roles" sec:authorize="hasAuthority('admin')">Roles</a></li>
+  <li><a href="/products">Products</a></li>
+  <li><a href="/manufacturers">Manufacturers</a></li>
+  <ul class="navbar-nav ml-auto">
+    <li><a class="nav-link" href="/logout">Logout</a></li>
+  </ul>
+</ul>

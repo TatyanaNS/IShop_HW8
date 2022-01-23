@@ -1,0 +1,116 @@
+/****************************/
+  html, body {
+    margin:0;
+    padding:0;
+    height:100%;
+  }
+
+  input[type="password"] {
+    -webkit-text-security: square;
+  }
+
+  td#roles ul, ul#validation {
+  background-color: #fff;
+  }
+
+  .error {
+    color: red;
+  }
+
+  h2 {
+  color: #04AA6D !important;
+  margin: 2%;
+  }
+
+  h2#edit_page {
+  color: #04AA6D !important;
+    margin: 2% 2% 0 15%;
+  }
+
+  .container {
+  margin-top: 2%;
+  margin-bottom: 5%;
+  }
+
+  .beak_btn {
+  background-color: #04AA6D;
+  color: white;
+  }
+
+  .navbar-nav {
+      display: flex;
+      flex-direction: column;
+      padding-left: 0;
+      margin-bottom: 0;
+      margin-left: 95%;
+      list-style: none;
+      width: 5%;
+      }
+
+  ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+  }
+
+  li {
+  float: left;
+  }
+
+  li a, ul.navbar-nav.ml-auto li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  }
+
+  li a:hover:not(.active), ul .navbar-nav.ml-auto li a:hover:not(.active) {
+  /*  background-color: #111;
+  color: white; */
+  color: #111;
+  background-color: #f2f2f2;
+  }
+  li a.active:hover:is(.active) {
+  background-color: #04AA6D;
+  color: white;
+  }
+  .active {
+  background-color: #04AA6D;
+  color: white;
+  }
+  .edit_btn {
+  background-color: #04AA6D !important;
+  color: white;
+  }
+
+  .del_btn {
+  background-color: #E55C5C !important;
+  color: white;
+  }
+
+  .add {
+  background-color: #FFC300 !important;
+  color: white;
+  }
+
+  .rd_link {
+  color: #04AA6D;
+  font-weight: bold;
+  text-decoration: none;
+  }
+
+  a.rd_link:hover {
+  color: #04AA6D;
+  font-weight: bold;
+  font-size: 24px;
+  text-decoration: none;
+  }
+
+  footer.bg-dark.text-center.text-white {
+  width: 100%;
+  margin-bottom: -100% !important;
+  }
+  /****************************/

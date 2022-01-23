@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <title th:text="${add} ? 'Create a User' : 'Edit a User'" />
+  <thymeleaf th:replace="headers :: head" />
+</head>
+<body>
+<ul  th:include="navigation :: nav"></ul>
+<div class="row">
+  <h2 id="edit_page" th:text="${add} ? 'Create a User:' : 'Edit a User:'"></h2>
+</div>
+<div class="container">
+    <div class="row">
+      <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+        <div class="btn-group me-2" role="group" aria-label="Second group">
+          <a th:href="@{/users}" type="button" class="btn beak_btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-left-square" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
+          </svg>
+            Back to users</a>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <form th:action="${add} ? @{/users/add} : @{/users/{userId}(userId=${user.id})}" th:object="${user}" method="POST">
+        <br/>
+        <div class="mb-3">
+          <label for="id" class="form-label" th:if="${user.id}">ID: </label>
+          <input type="hidden" class="form-control" id="id" th:utext="${user.id}">
+        </div>
+        <div class="mb-3">
+          <label for="lastName" class="form-label">Last name</label>
+          <input type="text" class="form-control" id="lastName" placeholder="Last name" th:field="*{lastName}">
+        </div>
+        <div class="mb-3">
+          <label for="firstName" class="form-label">First name</label>
+          <input type="text" class="form-control" id="firstName" th:field="*{firstName}" placeholder="First name">
+          <p class="alert alert-danger" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">First name</label>
+          <input type="text" class="form-control" id="email" th:field="*{email}" placeholder="Email">
+          <p class="alert alert-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">
+          <div class="alert alert-danger" th:if="${errorUniqueEmail}" th:utext="${errorUniqueEmail}"/>
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" class="form-control" id="password" th:field="*{password}">
+          <p class="alert alert-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">
+        </div>
+        <div class="form-outline mb-4">
+          <label for="roles" class="form-label">Roles</label>
+          <select class="form-select" multiple="multiple" id="roles" th:field="*{roles}">
+            <option th:each="role : ${roles}"
+                    th:value="${{role.id}}"
+                    th:utext="${role.name}"
+                    th:selected="${roles == role.id}">
+          </select>
+          <div class="alert alert-danger" th:if="${errorRoles}" th:utext="${errorRoles}"/>
+        </div>
+        <div class="row">
+          <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+            <div class="btn-group me-2" role="group" aria-label="Second group">
+              <input type="submit" th:value="${add} ? 'Create' : 'Update'" class="btn beak_btn"/>
+            </div>
+          </div>
+        </div>
+        <div th:if="${errorMessage}" th:utext="${errorMessage}" class="error" />
+      </form>
+    </div>
+</div>
+</body>
+</html>
