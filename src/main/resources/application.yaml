@@ -39,9 +39,9 @@ spring:
     activate:
       on-profile: prod
   datasource:
-    url: postgres://vgdguvxsiwudjz:eca5013a3ee01fcbaba27d508d6ffdbdeec4c0686d2ad616e15fdaaa95ed3cc0@ec2-54-228-97-176.eu-west-1.compute.amazonaws.com:5432/deo8dmv0vtqpjh
-    username: ${USER_NAME}
-    password: ${DB_PASSWORD}
+    url: ${JDBC_DATABASE_URL:jdbc:postgresql://localhost:5432/postgres}
+    username: ${JDBC_DATABASE_USERNAME:postgres}
+    password: ${JDBC_DATABASE_PASSWORD:admin}
     driver-class-name: org.postgresql.Driver
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
