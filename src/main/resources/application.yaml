@@ -40,8 +40,8 @@ spring:
       on-profile: prod
   datasource:
     url: jdbc:postgresql://shopdb.ckkjn6lyyd6e.us-east-1.rds.amazonaws.com/shopdb
-    username: ${USER_NAME}
-    password: ${DB_PASSWORD}
+    username: postgres
+    password: admin-123
     driver-class-name: org.postgresql.Driver
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
