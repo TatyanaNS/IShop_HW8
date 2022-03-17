@@ -41,15 +41,16 @@
                     <div th:if="${password}" th:utext="${password}" class="alert alert-danger">[error]</div>
                   </div>
 
-                  <div class="form-outline mb-4">
-                    <label for="roles" class="form-label">Roles</label>
-                    <select class="form-select" multiple="multiple" id="roles" name="roles">
-                      <option th:each="role : ${getRoles}"
-                              th:value="${{role.id}}"
-                              th:utext="${role.name}">
-                    </select>
-                    <div th:if="${roles}" th:utext="${roles}" class="alert alert-danger">[error]</div>
-                  </div>
+<!--                  <div class="form-outline mb-4">-->
+<!--                    <label for="roles" class="form-label">Roles</label>-->
+<!--                    <select class="form-select" multiple="multiple" id="roles" name="roles">-->
+<!--                      <option th:each="role : ${getRoles}"-->
+<!--                              th:value="${{role.id}}"-->
+<!--                              th:utext="${role.name}">-->
+<!--                    </select>-->
+<!--                    <div th:if="${roles}" th:utext="${roles}" class="alert alert-danger">[error]</div>-->
+<!--&lt;!&ndash;                    <div class="alert alert-danger" th:if="${errorRoles}" th:utext="${errorRoles}"/>&ndash;&gt;-->
+<!--                  </div>-->
 
                   <div class="d-flex justify-content-center">
                     <button type="submit" class="btn btn-success btn-block btn-lg custom-4" >Register</button>

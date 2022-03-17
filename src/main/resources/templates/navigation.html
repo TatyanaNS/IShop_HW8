@@ -6,7 +6,16 @@
   <li><a href="/roles" sec:authorize="hasAuthority('admin')">Roles</a></li>
   <li><a href="/products">Products</a></li>
   <li><a href="/manufacturers">Manufacturers</a></li>
-  <ul class="navbar-nav ml-auto">
-    <li><a class="nav-link" href="/logout">Logout</a></li>
-  </ul>
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+      <form class="d-flex">
+        <a class="nav-link">
+          <th:block sec:authentication="principal.username"></th:block>
+        </a>
+        <div class="btn btn-outline-success" type="button">
+          <a class="navbar" href="/logout">Logout</a>
+        </div>
+      </form>
+    </div>
+  </nav>
 </ul>

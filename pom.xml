@@ -87,6 +87,16 @@
       <groupId>org.thymeleaf.extras</groupId>
       <artifactId>thymeleaf-extras-springsecurity5</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.abego.treelayout</groupId>
+      <artifactId>org.abego.treelayout.core</artifactId>
+      <version>1.0.3</version>
+    </dependency>
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+      <scope>runtime</scope>
+    </dependency>
   </dependencies>
 
 
@@ -138,6 +148,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
+<!--        <version>${project.parent.version}</version>-->
         <configuration>
           <source>8</source>
           <target>8</target>

@@ -5,6 +5,7 @@ import com.ishop.model.User;
 import com.ishop.repositories.RoleRepository;
 import com.ishop.repositories.UserRepository;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,6 +34,12 @@ public class RegistrationController {
     return roleRepository.findAll();
   }
 
+  private List<Role> getRoleByDefault() {
+    return roleRepository.findAll().stream()
+            .filter(roleDefault -> roleDefault.getName().equals("user"))
+            .collect(Collectors.toList());
+  }
+
   @GetMapping("/registration")
   public String registration(Model model) {
     model.addAttribute("user", new User());
@@ -47,7 +54,7 @@ public class RegistrationController {
 
     User userFromDb = userRepository.findUserByEmail(user.getEmail());
     model.addAttribute("getRoles", initRoles());
-    if (result.hasErrors() || user.getRoles().size() == 0 || userFromDb != null) {
+    if (result.hasErrors() || user.getRoles() == null || userFromDb != null) {
       model.addAttribute("message", "Something wrong! Errors: " + result.getFieldErrors().size());
       result
           .getFieldErrors()
@@ -56,7 +63,7 @@ public class RegistrationController {
 //      result
 //          .getFieldErrors()
 //          .forEach(f -> System.out.println(f.getField() + ": " + f.getDefaultMessage()));
-      if (user.getRoles().size() == 0) {
+      if (user.getRoles() == null) {
         model.addAttribute("errorRoles", "User has minimum one role!");
         return "registration";
       } else if (userFromDb != null) {
@@ -66,6 +73,7 @@ public class RegistrationController {
       return "registration";
     }
     user.setPassword(passwordEncoder.encode(user.getPassword()));
+    user.setRoles(getRoleByDefault());
     userRepository.save(user);
     return "redirect:/login";
   }

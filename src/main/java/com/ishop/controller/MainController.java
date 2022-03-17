@@ -21,7 +21,6 @@ public class MainController {
 	@GetMapping("/")
 	public String mainPage(Authentication authentication,
 			HttpServletResponse response,
-			HttpServletRequest request,
 			Map<String, Object> model) {
 		model.put("userName", authentication.getName());
 		model.put("welcomeMsg", welcomeMsg);
