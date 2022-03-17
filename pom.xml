@@ -157,6 +157,5 @@
         </configuration>
       </plugin>
     </plugins>
-    <finalName>Springsecurityrememberme</finalName>
   </build>
 </project>
