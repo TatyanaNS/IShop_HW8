@@ -3,21 +3,17 @@ package com.ishop.controller;
 import com.ishop.model.Manufacturer;
 import com.ishop.repositories.ManufacturerRepository;
 import com.ishop.services.ManufacturerService;
-import java.util.List;
-import java.util.UUID;
-import javax.validation.Valid;
-import org.apache.velocity.exception.ResourceNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.List;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/manufacturers")
@@ -61,7 +57,7 @@ public class ManufacturerController {
         }
         return "manufacturer";
       }
-      Manufacturer newManufacturer = service.save(manufacturer);
+      service.save(manufacturer);
       return "redirect:/manufacturers";
     } catch (Exception ex) {
       String errorMessage = ex.getMessage();
@@ -82,7 +78,7 @@ public class ManufacturerController {
   public String updateManufacturer(Model model, @PathVariable UUID id, @ModelAttribute("manufacturer") @Valid Manufacturer manufacturer,
                                    BindingResult result) {
     model.addAttribute("add", false);
-    Manufacturer manufacturerFromDb = manufacturerRepository.findByName(manufacturer.getName());
+    manufacturerRepository.findByName(manufacturer.getName());
     try {
       if (result.hasErrors()) {
         return "manufacturer";
@@ -104,7 +100,7 @@ public class ManufacturerController {
     Manufacturer manufacturer = null;
     try {
       manufacturer = service.getManufacturer(id);
-    } catch (ResourceNotFoundException ex) {
+    } catch (Exception ex) {
       model.addAttribute("errorMessage", "Manufacturer not found");
     }
     model.addAttribute("allowDelete", true);
@@ -118,7 +114,7 @@ public class ManufacturerController {
     try {
       service.deleteById(id);
       return "redirect:/manufacturers";
-    } catch (ResourceNotFoundException ex) {
+    } catch (Exception ex) {
       String errorMessage = ex.getMessage();
       LOGGER.error(errorMessage);
       model.addAttribute("errorMessage", errorMessage);

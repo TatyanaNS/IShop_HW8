@@ -4,10 +4,6 @@ import com.ishop.exception.BadResourceException;
 import com.ishop.exception.ResourceAlreadyExistsException;
 import com.ishop.model.User;
 import com.ishop.repositories.UserRepository;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-import org.apache.velocity.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -15,6 +11,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 @Service
 public class UserService {
@@ -26,10 +26,6 @@ public class UserService {
 
   private boolean existsById(UUID id) {
     return userRepository.existsById(id);
-  }
-
-  public List<User> getAllUsers() {
-    return userRepository.findAll();
   }
 
   public User getUser(UUID id) {
@@ -58,11 +54,11 @@ public class UserService {
       }
   }
 
-  public void update(User user) throws BadResourceException, ResourceNotFoundException {
+  public void update(User user) throws Exception {
     User userDb = userRepository.getById(user.getId());
     if (!StringUtils.isEmpty(user.getEmail())) {
       if (!existsById(user.getId())) {
-        throw new ResourceNotFoundException("Cannot find User with id: " + user.getId());
+        throw new Exception("Cannot find User with id: " + user.getId());
       }
       if (StringUtils.hasText(user.getPassword())) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -77,9 +73,9 @@ public class UserService {
     }
   }
 
-  public void deleteById(UUID id) throws ResourceNotFoundException {
+  public void deleteById(UUID id) throws Exception {
     if (!existsById(id)) {
-      throw new ResourceNotFoundException("Cannot find user with id: " + id);
+      throw new Exception("Cannot find user with id: " + id);
     }
     else {
       userRepository.deleteById(id);

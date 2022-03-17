@@ -7,24 +7,18 @@ import com.ishop.model.User;
 import com.ishop.repositories.UserRepository;
 import com.ishop.services.RoleService;
 import com.ishop.services.UserService;
-import java.util.List;
-import java.util.UUID;
-import javax.validation.Valid;
-import org.apache.velocity.exception.ResourceNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.List;
+import java.util.UUID;
 
 @Controller
 @PreAuthorize("hasAuthority('admin')")
@@ -32,7 +26,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class UserController {
 
   private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
-  private final int ROW_PER_PAGE = 5;
   @Autowired
   private UserService userService;
   @Autowired
@@ -44,12 +37,10 @@ public class UserController {
     return roleService.getAllRoles();
   }
 
-  @Value("${msg.title}")
-  private String title;
-
   @GetMapping
   public String getUsers(Model model,
       @RequestParam(value = "page", defaultValue = "1") int pageNumber) {
+    int ROW_PER_PAGE = 5;
     List<User> users = userService.findAll(pageNumber, ROW_PER_PAGE);
     Long count = userService.count();
     boolean hasPrev = pageNumber > 1;
@@ -99,7 +90,7 @@ public class UserController {
     model.addAttribute("roles", init());
     try {
       user = userService.getUser(id);
-    } catch (ResourceNotFoundException ex) {
+    } catch (Exception ex) {
       model.addAttribute("errorMessage", "User not found");
     }
     model.addAttribute("add", false);
@@ -134,7 +125,7 @@ public class UserController {
     model.addAttribute("roles", init());
     try {
         user = userService.getUser(id);
-    } catch (ResourceNotFoundException ex) {
+    } catch (Exception ex) {
       model.addAttribute("errorMessage", "User not found");
     }
     model.addAttribute("allowDelete", true);
@@ -148,7 +139,7 @@ public class UserController {
     try {
         userService.deleteById(id);
         return "redirect:/users";
-    } catch (ResourceNotFoundException ex) {
+    } catch (Exception ex) {
       String errorMessage = ex.getMessage();
       LOGGER.error(errorMessage);
       model.addAttribute("errorMessage", errorMessage);

@@ -4,12 +4,12 @@ import com.ishop.exception.BadResourceException;
 import com.ishop.exception.ResourceAlreadyExistsException;
 import com.ishop.model.Product;
 import com.ishop.repositories.ProductRepository;
-import java.util.List;
-import java.util.UUID;
-import org.apache.velocity.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+
+import java.util.List;
+import java.util.UUID;
 
 @Service
 public class ProductService {
@@ -42,11 +42,11 @@ public class ProductService {
     }
   }
 
-  public void update(Product product) throws BadResourceException, ResourceNotFoundException {
-    Product productDb = productRepository.getById(product.getId());
+  public void update(Product product) throws Exception {
+    productRepository.getById(product.getId());
     if (!StringUtils.isEmpty(product.getName())) {
       if (!existsById(product.getId())) {
-        throw new ResourceNotFoundException("Cannot find product with id: " + product.getId());
+        throw new Exception("Cannot find product with id: " + product.getId());
       }
       productRepository.save(product);
     }
@@ -57,9 +57,9 @@ public class ProductService {
     }
   }
 
-  public void deleteById(UUID id) throws ResourceNotFoundException {
+  public void deleteById(UUID id) throws Exception {
     if (!existsById(id)) {
-      throw new ResourceNotFoundException("Cannot find product with id: " + id);
+      throw new Exception("Cannot find product with id: " + id);
     }
     else {
       productRepository.deleteById(id);

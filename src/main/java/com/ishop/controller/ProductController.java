@@ -1,30 +1,21 @@
 package com.ishop.controller;
 
-import com.ishop.exception.BadResourceException;
-import com.ishop.exception.ResourceAlreadyExistsException;
 import com.ishop.model.Manufacturer;
 import com.ishop.model.Product;
 import com.ishop.repositories.ProductRepository;
 import com.ishop.services.ManufacturerService;
 import com.ishop.services.ProductService;
-import com.ishop.services.ProductService;
-import java.sql.SQLException;
-import java.util.List;
-import java.util.UUID;
-import javax.validation.Valid;
-import org.apache.velocity.exception.ResourceNotFoundException;
-import org.hibernate.HibernateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.List;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/products")
@@ -132,7 +123,7 @@ public class ProductController {
     Product product = null;
     try {
       product = service.getProduct(id);
-    } catch (ResourceNotFoundException ex) {
+    } catch (Exception ex) {
       model.addAttribute("errorMessage", "Product not found");
     }
     model.addAttribute("allowDelete", true);
@@ -147,7 +138,7 @@ public class ProductController {
     try {
       service.deleteById(id);
       return "redirect:/products";
-    } catch (ResourceNotFoundException ex) {
+    } catch (Exception ex) {
       String errorMessage = ex.getMessage();
       LOGGER.error(errorMessage);
       model.addAttribute("errorMessage", errorMessage);

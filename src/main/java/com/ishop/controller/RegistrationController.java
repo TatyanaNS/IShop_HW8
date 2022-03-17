@@ -4,11 +4,6 @@ import com.ishop.model.Role;
 import com.ishop.model.User;
 import com.ishop.repositories.RoleRepository;
 import com.ishop.repositories.UserRepository;
-import java.util.List;
-import java.util.stream.Collectors;
-import javax.validation.Valid;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -18,10 +13,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.validation.Valid;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Controller
 public class RegistrationController {
-
-  private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
   @Autowired
   private UserRepository userRepository;

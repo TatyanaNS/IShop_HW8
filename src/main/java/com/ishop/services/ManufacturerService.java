@@ -4,12 +4,12 @@ import com.ishop.exception.BadResourceException;
 import com.ishop.exception.ResourceAlreadyExistsException;
 import com.ishop.model.Manufacturer;
 import com.ishop.repositories.ManufacturerRepository;
-import java.util.List;
-import java.util.UUID;
-import org.apache.velocity.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+
+import java.util.List;
+import java.util.UUID;
 
 @Service
 public class ManufacturerService {
@@ -55,9 +55,9 @@ public class ManufacturerService {
     return manufacturerRepository.save(manufacturer);
   }
 
-  public void deleteById(UUID id) throws ResourceNotFoundException {
+  public void deleteById(UUID id) throws Exception {
     if (!existsById(id)) {
-      throw new ResourceNotFoundException("Cannot find manufacturer with id: " + id);
+      throw new Exception("Cannot find manufacturer with id: " + id);
     }
     else {
       manufacturerRepository.deleteById(id);
