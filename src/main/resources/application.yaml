@@ -39,9 +39,9 @@ spring:
     activate:
       on-profile: prod
   datasource:
-    url: jdbc:postgresql://shopdb.ckkjn6lyyd6e.us-east-1.rds.amazonaws.com/shopdb
-    username: ${USER_NAME}
-    password: ${DB_PASSWORD}
+    url: jdbc:postgresql://ec2-54-228-97-176.eu-west-1.compute.amazonaws.com:5432/deo8dmv0vtqpjh
+    username: vgdguvxsiwudjz
+    password: eca5013a3ee01fcbaba27d508d6ffdbdeec4c0686d2ad616e15fdaaa95ed3cc0
     driver-class-name: org.postgresql.Driver
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
