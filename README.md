@@ -9,4 +9,4 @@ There are three profiles for running:
 - Customize application.yaml according to chosen DB configuration.
 Environment variables: URL, USER_NAME, DB_PASSWORD
 - Use http://localhost:8080/ to reach the application.
-- User #admin - login: admin@gmail.com; password: admin.
+- User # admin - login: admin@gmail.com; password: admin.
