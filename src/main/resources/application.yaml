@@ -1,0 +1,61 @@
+spring:
+  profiles:
+    active: prod
+
+server:
+  port: 8080
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+  datasource:
+    url: jdbc:h2:mem:ishop
+    username: admin
+    password:
+    driverClassName: org.h2.Driver
+  h2:
+    console.enabled: true
+    console.path: /h2
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    show-sql: true
+    generate-ddl: false
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    locations: classpath:db/migration/h2
+myconfig:
+  welcome:
+    message: Hello,
+    img: hello.img
+
+msg:
+  title: Spring Boot Title
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+  datasource:
+    url: ${URL}
+    username: ${USER_NAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    generate-ddl: false
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    locations: classpath:db/migration/postgres
+myconfig:
+  welcome:
+    message: Hello,
+    img: hello.img
+
+msg:
+  title: Spring Boot Title
