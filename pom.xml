@@ -9,7 +9,7 @@
     <version>2.6.1</version>
   </parent>
 
-  <groupId>com.ishop</groupId>
+  <groupId>com.ishop.IShopApplication</groupId>
   <artifactId>IShop</artifactId>
   <version>1.0-SNAPSHOT</version>
   <name>IShop</name>
